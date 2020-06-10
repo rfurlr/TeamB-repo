@@ -6,14 +6,14 @@
 
 
 //initializes the warning diode
-void warning_init(){
+void Light_warning_init(){
 	
 	DDRB |= _BV(DDB);
 	
 }
 
 //initializes the all clear diode
-void allclear_init(){
+void Light_allclear_init(){
 	
 	DDRB |= _BV(DDB);
 	
