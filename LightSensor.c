@@ -2,6 +2,8 @@
 #include <util/delay.h>
 #include <avr/cores.h>
 #include <stdbool.h>
+#include "processes.h"
+
 
 //initializes the warning diode
 void warning_init(){
