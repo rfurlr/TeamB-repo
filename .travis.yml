@@ -1,0 +1,17 @@
+language: c
+
+compiler:
+  - gcc
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y install libcunit1 libcunit1-doc libcunit1-dev
+install:
+  - echo  "Reached Install Section"
+
+script:
+  - echo "Reached  Script Section"
+  - //gcc  Main.c Detect_UnderVoltage.c Detect_UnderFrequency.c -o output 
+  - gcc MissionTimer.c
+  - echo "Reached unit Section"
+  - // gcc  -I CUnit/Headers CUnit/Sources/Framework/*.c CUnit/Sources/Basic/Basic.c Detect_UnderVoltage.c Detect_UnderFrequency.c Run_cunit.c -o Nithin_test
+  - // ./Nithin_test
