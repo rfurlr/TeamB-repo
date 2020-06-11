@@ -21,13 +21,11 @@ void Main(){
 	int y = 0;
 	int temp = 0;
 	
+	//set up timer and interrupt
 	OCR1A = 0x3D08;
 	TCCR1B |= (1 << WGM12); // Mode 4, CTC on OCR1A
-    	
 	TIMSK1 |= (1 << OCIE1A);  //Set interrupt on compare match
-   
 	TCCR1B |= (1 << CS12) | (1 << CS10); // set prescaler to 1024 and start the timer
-    
 	sei(); // enable interrupts
     
 	
@@ -43,7 +41,7 @@ void Main(){
 		void LightSen();
 
 		//returns 1 or 2 if temp is not room temp, 0 if room temp.
-      	temp = tempSensor();
+      		temp = tempSensor();
 	}
 
 int tempSensor()
@@ -55,18 +53,18 @@ int tempSensor()
   	//Read analog input 0
   	sensorValue = ADCsingleREAD(0);
   
-  	//return current temperature state
+  	//set  current temperature state. 0 if room temp, 1 if temp too low, 2 if temp too high
   	if(sensorValue > 155)
-  	{
+	{
   		state = 2;
   	}
   	else if(sensorValue < 135)
-  	{
+	{
   		state = 1;
   	}
   	else
   	{
-    	state = 0;
+    		state = 0;
   	}
   
   	return state;
