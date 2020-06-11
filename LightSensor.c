@@ -4,6 +4,12 @@
 #include <stdbool.h>
 #include "processes.h"
 
+//initializes the light sensor
+void Light_seninit(){
+
+	DDRB |= _BV(DDB);
+	
+}
 
 //initializes the warning diode
 void Light_warning_init(){
@@ -46,4 +52,24 @@ void Light_allclear_off(){
 			
 	PORTB &= ~_BV(PORTB);
 	
+}
+
+void LightSen(){
+
+	warning_init();
+	allclear_init();
+	Light_seninit();
+	
+	if (analog_read(_BV(DDB)) > upper_warning_Value){
+		warning_on();
+		allclear_off();
+	}
+	else if(analog_read(_BV(DDB)) < min_warning_Value){
+		warning_on();
+		allclear_off();
+	}
+	else 
+		warning_off();
+		allclear_on();	
+
 }
