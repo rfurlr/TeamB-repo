@@ -12,11 +12,14 @@
 #include <avr/cores.h>
 #include <util/delay.h>
 #include "processes.h"
+#include <stdint.h>       // needed for uint8_t
 
 void Main(){
 	int y = 0;
+	int temp = 0;
+	
 	//run the process as an infinite loop that starts when the machine starts, and stops when the machine is off
-	while (y < 2){
+	while (!y){
 		void Light_warning_init();
 		void Light_allclear_init();
 		void Light_seninit();
@@ -26,9 +29,53 @@ void Main(){
 		void Light_allclear_off();
 		void LightSen();
 
-		
+		//returns 1 or 2 if temp is not room temp, 0 if room temp.
+      	temp = tempSensor();
 	}
 
+int tempSensor()
+{
+	//initialize values
+	int sensorValue = 0;
+	int state = 0;
+  
+  	//Read analog input 0
+  	sensorValue = ADCsingleREAD(0);
+  
+  	//return current temperature state
+  	if(sensorValue > 155)
+  	{
+  		state = 2;
+  	}
+  	else if(sensorValue < 135)
+  	{
+  		state = 1;
+  	}
+  	else
+  	{
+    	state = 0;
+  	}
+  
+  	return state;
+}
+
+int ADCsingleREAD(uint8_t adctouse){
 	
-	
+    int ADCval;
+
+    ADMUX = adctouse;         // use inputted ADC
+    ADMUX |= (1 << REFS0);    // use AVcc as the reference
+    ADMUX &= ~(1 << ADLAR);   // clear for 10 bit resolution
+    
+    ADCSRA |= (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0);    // 128 prescale for 8Mhz
+    ADCSRA |= (1 << ADEN);    // Enable the ADC
+
+    ADCSRA |= (1 << ADSC);    // Start the ADC conversion
+
+    while(ADCSRA & (1 << ADSC));      // This line waits for the ADC to finish 
+
+    ADCval = ADCL;
+    ADCval = (ADCH << 8) + ADCval;    // ADCH is read so ADC can be updated again
+
+    return ADCval;
 }
