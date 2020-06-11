@@ -10,8 +10,8 @@ install:
 
 script:
   - echo "Reached  Script Section"
-  - /*gcc  Main.c Detect_UnderVoltage.c Detect_UnderFrequency.c -o output */
-  - gcc MissionTimer.c
+  #- gcc  Main.c Detect_UnderVoltage.c Detect_UnderFrequency.c -o output 
+  - gcc MissionTimer.c 
   - echo "Reached unit Section"
-  - /* gcc  -I CUnit/Headers CUnit/Sources/Framework/*.c CUnit/Sources/Basic/Basic.c Detect_UnderVoltage.c Detect_UnderFrequency.c Run_cunit.c -o Nithin_test
-  -  ./Nithin_test */
+  #-  gcc  -I CUnit/Headers CUnit/Sources/Framework/*.c CUnit/Sources/Basic/Basic.c Detect_UnderVoltage.c Detect_UnderFrequency.c Run_cunit.c -o Nithin_test
+  #-  ./Nithin_test 
