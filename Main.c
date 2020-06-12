@@ -43,7 +43,8 @@ void Main(){
 		//returns 1 or 2 if temp is not room temp, 0 if room temp.
       		temp = tempSensor();
 	}
-
+	
+	
 int tempSensor()
 {
 	//initialize values
@@ -69,6 +70,13 @@ int tempSensor()
   
   	return state;
 }
+
+int ANALOGwrite(){
+
+	
+
+}	
+	
 
 int ADCsingleREAD(uint8_t adctouse){
 	
