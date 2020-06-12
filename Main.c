@@ -71,9 +71,10 @@ int tempSensor()
   	return state;
 }
 
-int ANALOGwrite(){
 
-	
+
+void PWMsingleWRITE(uint8_t outpin, uint8_t pwmcycle, ){
+
 
 }	
 	
