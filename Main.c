@@ -14,6 +14,7 @@
 #include "processes.h"
 #include <stdint.h>       // needed for uint8_t
 #include <avr/interrupt.h>
+#include <stm32f4xx.h>
 
 int seconds = 0; //counts seconds through timer and interrupt
 
