@@ -60,11 +60,11 @@ void LightSen(){
 	allclear_init();
 	Light_seninit();
 	
-	if (analog_read(_BV(DDB)) > upper_warning_Value){
+	if (ADCsingleRead(_BV(DDB)) > upper_warning_Value){
 		warning_on();
 		allclear_off();
 	}
-	else if(analog_read(_BV(DDB)) < min_warning_Value){
+	else if(ADCsingleRead(_BV(DDB)) < min_warning_Value){
 		warning_on();
 		allclear_off();
 	}
