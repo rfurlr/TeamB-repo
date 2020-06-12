@@ -73,8 +73,9 @@ int tempSensor()
 
 
 
-void PWMsingleWRITE(uint8_t outpin, uint8_t pwmcycle, ){
-
+void PWMsingleWRITE(uint8_t outpin, uint8_t pwmcycle, unsigned int pulse_frequency, unsigned int pulse_clock){
+	
+	
 
 }	
 	
