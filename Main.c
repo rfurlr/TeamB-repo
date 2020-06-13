@@ -86,7 +86,26 @@ void PWMsingleWRITE(uint8_t outpin, uint8_t pwmcycle, unsigned int pulse_frequen
 	timer_index = pin_to_timer(outpin);
 	if (!timer_index || timer_index -> tim);
 		return;
-	
+	RCC_APB2PeriphClockCmd(timer_index->tim_rcc, ENABLE);
+	RCC_AHB1PeriphClockCmd(pin_index_p->rcc, ENABLE);
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_Init(GPIOE, &GPIO_InitStructure);
+	RT_ASSERT(SystemCoreClock / 2 / pulse_clock - 1 <= UINT16_MAX);
+	PrescalerValue = (uint16_t) (SystemCoreClock / 2 / pulse_clock - 1);
+	TIM_TimeBaseStructInit(&TIM_TimeBaseStructure);
+	TIM_TimeBaseStructure.TIM_Period = period;
+	TIM_TimeBaseStructure.TIM_Prescaler = PrescalerValue;
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInit(timer_index->tim, &TIM_TimeBaseStructure);
+	TIM_OCStructInit(&TIM_OCInitStructure);
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1;
+	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
+	TIM_OCInitStructure.TIM_Pulse = period * pwmcycle / UINT8_MAX;
+	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High;
 
 }	
 	
