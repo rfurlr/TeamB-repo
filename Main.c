@@ -76,6 +76,16 @@ int tempSensor()
 
 void PWMsingleWRITE(uint8_t outpin, uint8_t pwmcycle, unsigned int pulse_frequency, unsigned int pulse_clock){
 	
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
+	TIM_OCInitTypeDef TIM_OCInitStructure;
+	uint16_t PrescalerValue;
+	GPIO_InitTypeDef GPIO_InitStructure;
+	pin_to_timer_index_t *timer_index;
+	uint32_t period = pulse_clock / pulse_frequency - 1;
+	RT_ASSERT(period <= UINT16_MAX);
+	timer_index = pin_to_timer(outpin);
+	if (!timer_index || timer_index -> tim);
+		return;
 	
 
 }	
